@@ -4,28 +4,81 @@
     <div class="thumb">
       <div class="custom-control custom-checkbox">
         <!-- 复选框 -->
-        <input type="checkbox" class="custom-control-input" id="cb1" :checked="true" />
-        <label class="custom-control-label" for="cb1">
+        <input
+          type="checkbox"
+          class="custom-control-input"
+          :id="'cb' + id"
+          :checked="state"
+          @change="changeState"
+        />
+        <label class="custom-control-label" :for="'cb' + id">
           <!-- 商品的缩略图 -->
-          <img src="../../assets/logo.png" alt="" />
+          <img :src="pic" alt="" />
         </label>
       </div>
     </div>
     <!-- 右侧信息区域 -->
     <div class="goods-info">
       <!-- 商品标题 -->
-      <h6 class="goods-title">商品名称商品名称商品名称商品名称</h6>
+      <h6 class="goods-title">{{ title }}</h6>
       <div class="goods-info-bottom">
         <!-- 商品价格 -->
-        <span class="goods-price">￥0</span>
+        <span class="goods-price">￥{{ price }}</span>
         <!-- 商品的数量 -->
+        <Counter
+          :num="count"
+          :id="id"
+          @goodAdd="add"
+          @goodMinus="minus"
+        ></Counter>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+import Counter from "@/components/Counter/Counter.vue";
+export default {
+  components: { Counter },
+  props: {
+    id: {
+      type: Number,
+      required: true
+    },
+    title: {
+      type: String,
+      default: ""
+    },
+    pic: {
+      type: String,
+      default: ""
+    },
+    price: {
+      type: Number,
+      default: 0
+    },
+    count: {
+      type: Number,
+      default: 1
+    },
+    state: {
+      type: Boolean,
+      default: true
+    }
+  },
+  methods: {
+    changeState(e) {
+      const newState = e.target.checked;
+      this.$emit("change-state", { id: this.id, value: newState });
+    },
+    add(obj) {
+      this.$emit("listAdd", obj);
+    },
+    minus(objm) {
+      this.$emit("listMinus", objm);
+    }
+  }
+};
 </script>
 
 <style lang="less" scoped>
