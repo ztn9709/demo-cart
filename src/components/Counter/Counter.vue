@@ -5,7 +5,7 @@
     <!-- 减 1 的按钮 -->
     <button type="button" class="btn btn-light btn-sm" @click="minus">-</button>
     <!-- 购买的数量 -->
-    <span class="number-box">{{ num }}</span>
+    <span class="number-box">{{ count }}</span>
     <!-- 加 1 的按钮 -->
     <button type="button" class="btn btn-light btn-sm" @click="add">+</button>
   </div>
@@ -14,31 +14,20 @@
 <script>
 export default {
   props: {
-    id: {
-      type: Number,
-      required: true
-    },
-    num: {
+    count: {
       type: Number,
       default: 1
     }
   },
   methods: {
     add() {
-      const obj = {
-        id: this.id,
-        value: this.num + 1
-      };
-      this.$emit("goodAdd", obj);
+      this.$emit("count-change", this.count + 1);
     },
     minus() {
-      if (this.num > 1) {
-        const objm = {
-          id: this.id,
-          value: this.num - 1
-        };
-        this.$emit("goodMinus", objm);
+      if (this.count === 1) {
+        return;
       }
+      this.$emit("count-change", this.count - 1);
     }
   }
 };

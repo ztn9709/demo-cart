@@ -8,12 +8,14 @@
       :title="item.goods_name"
       :pic="item.goods_img"
       :price="item.goods_price"
-      :count="item.goods_count"
       :state="item.goods_state"
       @change-state="getNewState"
-      @listAdd="add"
-      @listMinus="minus"
-    ></Good>
+    >
+      <Counter
+        :count="item.goods_count"
+        @count-change="getNewCount(item, $event)"
+      ></Counter>
+    </Good>
     <Footer
       :isFull="fullState"
       :summary="SUM"
@@ -28,6 +30,7 @@ import axios from "axios";
 import Header from "@/components/Header/Header.vue";
 import Good from "@/components/Goods/Goods.vue";
 import Footer from "@/components/Footer/Footer.vue";
+import Counter from "@/components/Counter/Counter.vue";
 
 export default {
   data() {
@@ -63,7 +66,8 @@ export default {
   components: {
     Header,
     Good,
-    Footer
+    Footer,
+    Counter
   },
   methods: {
     async getCartList() {
@@ -80,25 +84,12 @@ export default {
         }
       });
     },
+    getNewCount(item, e) {
+      item.goods_count = e;
+    },
     fullSelect(val) {
       this.list.forEach(item => {
         item.goods_state = val;
-      });
-    },
-    add(obj) {
-      this.list.some((item, index) => {
-        if (item.id === obj.id) {
-          item.goods_count = obj.value;
-          return true;
-        }
-      });
-    },
-    minus(objm) {
-      this.list.some((item, index) => {
-        if (item.id === objm.id) {
-          item.goods_count = objm.value;
-          return true;
-        }
       });
     }
   },

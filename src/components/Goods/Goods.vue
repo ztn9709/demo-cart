@@ -25,21 +25,14 @@
         <!-- 商品价格 -->
         <span class="goods-price">￥{{ price }}</span>
         <!-- 商品的数量 -->
-        <Counter
-          :num="count"
-          :id="id"
-          @goodAdd="add"
-          @goodMinus="minus"
-        ></Counter>
+        <slot></slot>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Counter from "@/components/Counter/Counter.vue";
 export default {
-  components: { Counter },
   props: {
     id: {
       type: Number,
@@ -57,10 +50,6 @@ export default {
       type: Number,
       default: 0
     },
-    count: {
-      type: Number,
-      default: 1
-    },
     state: {
       type: Boolean,
       default: true
@@ -70,12 +59,6 @@ export default {
     changeState(e) {
       const newState = e.target.checked;
       this.$emit("change-state", { id: this.id, value: newState });
-    },
-    add(obj) {
-      this.$emit("listAdd", obj);
-    },
-    minus(objm) {
-      this.$emit("listMinus", objm);
     }
   }
 };
