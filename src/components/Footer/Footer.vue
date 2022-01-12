@@ -2,13 +2,7 @@
   <div class="footer-container">
     <!-- 左侧的全选 -->
     <div class="custom-control custom-checkbox">
-      <input
-        type="checkbox"
-        class="custom-control-input"
-        id="cbFull"
-        :checked="isFull"
-        @change="isFullSelect"
-      />
+      <input type="checkbox" class="custom-control-input" id="cbFull" :checked="isFull" @change="isFullSelect" />
       <label class="custom-control-label" for="cbFull">全选</label>
     </div>
 
@@ -43,10 +37,10 @@ export default {
   },
   methods: {
     isFullSelect(e) {
-      this.$emit("is-full-select", e.target.checked);
+      this.$emit('is-full-select', e.target.checked)
     }
   }
-};
+}
 </script>
 
 <style lang="less" scoped>

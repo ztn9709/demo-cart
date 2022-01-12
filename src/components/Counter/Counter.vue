@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="number-container d-flex justify-content-center align-items-center"
-  >
+  <div class="number-container d-flex justify-content-center align-items-center">
     <!-- 减 1 的按钮 -->
     <button type="button" class="btn btn-light btn-sm" @click="minus">-</button>
     <!-- 购买的数量 -->
@@ -21,16 +19,16 @@ export default {
   },
   methods: {
     add() {
-      this.$emit("count-change", this.count + 1);
+      this.$emit('count-change', this.count + 1)
     },
     minus() {
       if (this.count === 1) {
-        return;
+        return
       }
-      this.$emit("count-change", this.count - 1);
+      this.$emit('count-change', this.count - 1)
     }
   }
-};
+}
 </script>
 
 <style lang="less" scoped>

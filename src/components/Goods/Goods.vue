@@ -4,13 +4,7 @@
     <div class="thumb">
       <div class="custom-control custom-checkbox">
         <!-- 复选框 -->
-        <input
-          type="checkbox"
-          class="custom-control-input"
-          :id="'cb' + id"
-          :checked="state"
-          @change="changeState"
-        />
+        <input type="checkbox" class="custom-control-input" :id="'cb' + id" :checked="state" @change="changeState" />
         <label class="custom-control-label" :for="'cb' + id">
           <!-- 商品的缩略图 -->
           <img :src="pic" alt="" />
@@ -40,11 +34,11 @@ export default {
     },
     title: {
       type: String,
-      default: ""
+      default: ''
     },
     pic: {
       type: String,
-      default: ""
+      default: ''
     },
     price: {
       type: Number,
@@ -57,11 +51,11 @@ export default {
   },
   methods: {
     changeState(e) {
-      const newState = e.target.checked;
-      this.$emit("change-state", { id: this.id, value: newState });
+      const newState = e.target.checked
+      this.$emit('change-state', { id: this.id, value: newState })
     }
   }
-};
+}
 </script>
 
 <style lang="less" scoped>
